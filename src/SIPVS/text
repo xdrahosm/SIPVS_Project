@@ -1,0 +1,23 @@
+mainWindowTitle= SIPVS PROJEKT 1
+file=File
+help=Help
+close=Close
+about=About
+
+formularName=Course assign
+
+label1=Course Title
+label2=Course Room
+label3=Course Date
+label4=Course Lessons
+label5=Course Time
+
+label6=Student FirstName
+label7=Student LastName
+label8=Student Mobile
+checkBox1=checkBox
+
+addButton=add
+saveXml = Save Xml
+validateXml= Validate Xml
+generateXsl= Generate XSL
