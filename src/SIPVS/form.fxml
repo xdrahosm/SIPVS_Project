@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane fx:id="mainBorderPane" prefHeight="610.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIPVS.controller.Controller">
+    <top>
+        <VBox fx:id="menu">
+            <children>
+                <MenuBar fx:id="menuBar">
+                    <menus>
+                        <Menu text="File">
+                            <items>
+                                <MenuItem fx:id="close" text="close" />
+                            </items>
+                        </Menu>
+                        <Menu text="help">
+                            <items>
+                                <MenuItem fx:id="about" text="about" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <ToolBar fx:id="topToolBar" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <AnchorPane fx:id="mainAnchorPane">
+            <children>
+                <Label layoutX="328.0" layoutY="14.0" prefHeight="30.0" prefWidth="158.0" text="Library" />
+
+                <Label layoutX="14.0" layoutY="63.0" text="Book name" />
+                <TextField fx:id="bookName" layoutX="14.0" layoutY="99.0" />
+                <Label layoutX="244.0" layoutY="63.0" text="Author name" />
+                <TextField fx:id="authorName" layoutX="244.0" layoutY="99.0" />
+                <Label layoutX="466.0" layoutY="63" text="Pages" />
+                <TextField fx:id="pages" layoutX="466.0" layoutY="99.0" />
+
+                <Label layoutX="14.0" layoutY="162.0" text="Printing Year" />
+                <TextField fx:id="printingYear" layoutX="14.0" layoutY="191.0" />
+                <Label layoutX="244.0" layoutY="162.0" text="First Published" />
+                <TextField fx:id="firstPublished" layoutX="244.0" layoutY="191.0" />
+                <Label layoutX="466.0" layoutY="162.0" text="ISBN" />
+                <TextField fx:id="isbn" layoutX="466.0" layoutY="191.0" />
+
+                <Label layoutX="14.0" layoutY="261.0" text="Book description" />
+                <TextArea fx:id="bookDescription" layoutX="14.0" layoutY="295.0" maxHeight="50" prefWidth="650.0"/>
+
+                <Button fx:id="addBorrowButton" layoutX="690.0" layoutY="380.0" mnemonicParsing="false" text="Add borrow" />
+
+                <Label layoutX="14.0" layoutY="346.0" text="Student Name" />
+                <Label layoutX="244.0" layoutY="346.0" text="Borrowed Date" />
+                <Label layoutX="466.0" layoutY="346.0" text="Returned Date" />
+
+                <TextField fx:id="studentName" layoutX="14.0" layoutY="380.0" />
+                <DatePicker fx:id="borrowDate" layoutX="244.0" layoutY="380.0" />
+                <DatePicker fx:id="returnDate" layoutX="466.0" layoutY="380.0" />
+
+                <TableView fx:id="table" layoutX="1.0" layoutY="426.0" prefHeight="170.0" prefWidth="811.0">
+                    <columns>
+                        <TableColumn fx:id="nameColumn" prefWidth="241.0" text="Name" />
+                        <TableColumn fx:id="borrowColumn" minWidth="0.0" prefWidth="295.0" text="Borrowed" />
+                        <TableColumn fx:id="returnColumn" prefWidth="261.0" text="Returned" />
+                    </columns>
+                </TableView>
+
+
+            </children>
+        </AnchorPane>
+    </center>
+    <bottom>
+        <ToolBar prefHeight="50.0" prefWidth="812.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button fx:id="saveXml" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Save XML" />
+                <Button fx:id="validateXml" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Validate XML" />
+                <Button fx:id="generateHtml" mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Generate HTML" />
+            </items>
+        </ToolBar>
+    </bottom>
+
+</BorderPane>
