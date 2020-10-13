@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<md:Library xmlns:md="http://www.example.org/sipvs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.example.org/sipvs/schema.xsd">
+    <md:Book>
+        <md:BookName>name</md:BookName>
+        <md:AuthorName>author</md:AuthorName>
+        <md:Pages>55</md:Pages>
+        <md:PrintingYear>199</md:PrintingYear>
+        <md:FirstPublished>159</md:FirstPublished>
+        <md:ISBN>dfav</md:ISBN>
+        <md:BookDescription>test description</md:BookDescription>
+        <md:BorrowHistory>
+            <md:Borrow id="1">
+                <md:StudentName>test</md:StudentName>
+                <md:BorrowDate>2020-10-08</md:BorrowDate>
+                <md:ReturnDate>2020-10-10</md:ReturnDate>
+            </md:Borrow>
+            <md:Borrow id="2">
+                <md:StudentName>test dva</md:StudentName>
+                <md:BorrowDate>2020-10-11</md:BorrowDate>
+                <md:ReturnDate>2020-10-13</md:ReturnDate>
+            </md:Borrow>
+        </md:BorrowHistory>
+    </md:Book>
+</md:Library>
