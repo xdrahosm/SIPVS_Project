@@ -1,8 +1,10 @@
 package SIPVS.controller;
 
+import SIPVS.helper.ResourceHelper;
 import SIPVS.helper.XmlManipulator;
 import SIPVS.model.Book;
 import SIPVS.model.Borrow;
+import SIPVS.sign.XadesSigner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +16,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
+
+import javax.xml.crypto.dsig.XMLSignature;
 import java.io.File;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
@@ -33,8 +37,12 @@ public class Controller implements Initializable {
 
     @FXML
     Button validateXml;
+
     @FXML
     Button generateHtml;
+
+    @FXML
+    Button signXML;
 
     @FXML
     DatePicker borrowDate;
@@ -101,6 +109,7 @@ public class Controller implements Initializable {
 
         saveXml.setOnAction(new EventHandler<ActionEvent>() {
 
+            public void handle(ActionEvent event) {
                 try{
                     saveXml();
                 }catch (Exception e){
@@ -123,23 +132,36 @@ public class Controller implements Initializable {
 
         });
 
-        generateHtml.setOnAction(new EventHandler<ActionEvent>() {
+        generateHtml.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("HTML files (*.html)",
+                    "*.html");
+            fileChooser.getExtensionFilters().add(extFilter);
 
-            public void handle(ActionEvent event) {
-                FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("HTML files (*.html)",
-                        "*.html");
-                fileChooser.getExtensionFilters().add(extFilter);
+            // Show save file dialog
+            File file = fileChooser.showSaveDialog(mainBorderPane.getScene().getWindow());
 
-                // Show save file dialog
-                File file = fileChooser.showSaveDialog(mainBorderPane.getScene().getWindow());
-
-                if (file != null) {
-                    xmlManipulator.generateHtmlFile(file.getAbsolutePath());
-                }
-
+            if (file != null) {
+                xmlManipulator.generateHtmlFile(file.getAbsolutePath());
             }
 
+        });
+
+        signXML.setOnAction(event -> {
+            Thread one = new Thread() {
+                public void run() {
+
+                    XadesSigner signer = ResourceHelper.getXadesSigner();
+                    if(signer == null) {
+                        System.out.println("Signer = null!!");
+                        return;
+                    }
+
+                    signer.sign();
+
+                }
+            };
+            one.start();
         });
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<Borrow,String>("name"));

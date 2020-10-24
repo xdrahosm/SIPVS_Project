@@ -20,7 +20,6 @@
                     .field {
                     padding-left: 10px;
                     padding-right: 100px;
-
                     min-width: 150px;
                     display: inline-block;
                     }
