@@ -20,6 +20,7 @@
                     .field {
                     padding-left: 10px;
                     padding-right: 100px;
+                    min-width: 150px;
                     display: inline-block;
                     }
 
@@ -102,13 +103,13 @@
                     <xsl:for-each select="//md:BorrowHistory/md:Borrow">
                         <tr>
                             <td>
-                                <xsl:value-of select="//md:StudentName"/>
+                                <xsl:value-of select="md:StudentName"/>
                             </td>
                             <td>
-                                <xsl:value-of select="//md:BorrowDate"/>
+                                <xsl:value-of select="md:BorrowDate"/>
                             </td>
                             <td>
-                                <xsl:value-of select="//md:ReturnDate"/>
+                                <xsl:value-of select="md:ReturnDate"/>
                             </td>
                         </tr>
                     </xsl:for-each>

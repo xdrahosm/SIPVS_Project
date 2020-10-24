@@ -36,7 +36,8 @@ public class XmlManipulator {
 		try {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Source xsl = new StreamSource(getClass().getClassLoader().getResource("xml/stylesheet.xsl").getPath());
-			Source xml = new StreamSource(getClass().getClassLoader().getResource("xml/export.xml").getPath());
+			String xmlPath = path==null? getClass().getClassLoader().getResource("xml/export.xml").getPath(): path;
+			Source xml = new StreamSource(xmlPath);
 
 			OutputStream outputStream = new FileOutputStream(saveFilePath);
 			Transformer transformer = transformerFactory.newTransformer(xsl);
