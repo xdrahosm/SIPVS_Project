@@ -26,7 +26,7 @@
 	</xs:complexType>
 
 	<xs:complexType name="borrowHistory">
-		<xs:sequence minOccurs="1" maxOccurs="30">
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
 			<xs:element name="Borrow" type="md:borrow"/>
 		</xs:sequence>
 	</xs:complexType>

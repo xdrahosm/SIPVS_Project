@@ -58,7 +58,8 @@
                 <TextField fx:id="isbn" layoutX="466.0" layoutY="191.0" />
 
                 <Label layoutX="14.0" layoutY="261.0" text="Book description" />
-                <TextArea fx:id="bookDescription" layoutX="14.0" layoutY="295.0" maxHeight="50" prefWidth="650.0" />
+
+                <TextArea fx:id="bookDescription" layoutX="14.0" layoutY="295.0" maxHeight="50" prefWidth="650.0"/>
 
                 <Button fx:id="addBorrowButton" layoutX="690.0" layoutY="380.0" mnemonicParsing="false" text="Add borrow" />
 
@@ -89,6 +90,7 @@
                 <Button fx:id="validateXml" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Validate XML" />
                 <Button fx:id="generateHtml" mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Generate HTML" />
                 <Button fx:id="signXML" mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Sign XML" />
+
             </items>
         </ToolBar>
     </bottom>

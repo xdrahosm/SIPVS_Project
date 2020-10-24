@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
+
 import javax.xml.crypto.dsig.XMLSignature;
 import java.io.File;
 import java.net.URL;
@@ -109,7 +110,6 @@ public class Controller implements Initializable {
         saveXml.setOnAction(new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent event) {
-
                 try{
                     saveXml();
                 }catch (Exception e){
@@ -170,7 +170,6 @@ public class Controller implements Initializable {
 
         table.setItems(borrows);
     }
-
 
     private void addBorrow() {
         String name = studentName.getText();
