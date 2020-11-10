@@ -12,15 +12,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class XadesSigner {
 
     private List<String> xmlFiles;
     private String xsdFile;
     private String xsltFile;
-    private List<String> signed;
+    private String signed;
 
-    public XadesSigner(List<String> xmlFiles, String xsdFile, String xsltFile, List<String> signed) {
+    public XadesSigner(List<String> xmlFiles, String xsdFile, String xsltFile, String signed) {
         this.xmlFiles = xmlFiles;
         this.xsdFile = xsdFile;
         this.xsltFile = xsltFile;
@@ -38,12 +39,16 @@ public class XadesSigner {
         String DEFAULT_XSLT_REF = "http://www.example.org/sipvs";
         XmlPlugin xmlPlugin = new XmlPlugin();
 
+
         xmlFiles.forEach((fileName) -> {
             System.out.println("Reading file: " + fileName);
             try {
+                String[] nazovSplit = fileName.split("\\\\");
+                String nazov = nazovSplit[nazovSplit.length - 1];
+
                 DataObject xmlObj = xmlPlugin.createObject2(
-                        "XML" + 1,
-                        "XML" + 1,
+                        nazov + 1,
+                        nazov,
                         ResourceHelper.readResource(fileName),
                         ResourceHelper.readResource(xsdFile),
                         "http://www.example.org/sipvs",
@@ -51,7 +56,7 @@ public class XadesSigner {
                         ResourceHelper.readResource(xsltFile),
                         DEFAULT_XSLT_REF,
                         "HTML"
-                        );
+                );
 
                 if (xmlObj == null) {
                     System.out.println("XMLPlugin.createObject() errorMessage=" + xmlPlugin.getErrorMessage());
@@ -60,9 +65,9 @@ public class XadesSigner {
                     return;
                 }
 
-                int rc = dSigner.addObject(xmlObj);
-                if (rc != 0) {
-                    System.out.println("XadesSig.addObject() errorCode=" + rc + ", errorMessage=" + dSigner.getErrorMessage());
+                int r = dSigner.addObject(xmlObj);
+                if (r != 0) {
+                    System.out.println("XadesSig.addObject() errorCode=" + r + ", errorMessage=" + dSigner.getErrorMessage());
                     return;
                 }
 
@@ -73,27 +78,25 @@ public class XadesSigner {
             }
         });
 
-        int rc = dSigner.sign20("signatureId20", "http://www.w3.org/2001/04/xmlenc#sha256", "urn:oid:1.3.158.36061701.1.2.2", "dataEnvelopeId",
+
+        int c = dSigner.sign20("signatureId20", "http://www.w3.org/2001/04/xmlenc#sha256", "urn:oid:1.3.158.36061701.1.2.2", "dataEnvelopeId",
                 "dataEnvelopeURI", "dataEnvelopeDescr");
-        if (rc != 0) {
-            System.out.println("XadesSig.sign20() errorCode=" + rc + ", errorMessage=" + dSigner.getErrorMessage());
+
+        if (c != 0) {
+            System.out.println("XadesSig.sign20() errorCode=" + c + ", errorMessage=" + dSigner.getErrorMessage());
             return;
         }
 
-        System.out.println(dSigner.getSignedXmlWithEnvelope());
-
-        this.signed.forEach((x) -> {
-            try{
-                FileWriter fileWriter = new FileWriter(new File(x));
-                fileWriter.write(dSigner.getSignedXmlWithEnvelope());
-                fileWriter.flush();
-                fileWriter.close();
-            } catch(IOException e) {
-                e.printStackTrace();
-                Alert dialog = new Alert(Alert.AlertType.ERROR, "Could not write signed file", ButtonType.OK);
-                dialog.show();
-            }
-        });
+        try{
+            FileWriter fileWriter = new FileWriter(new File(this.signed));
+            fileWriter.write(dSigner.getSignedXmlWithEnvelope());
+            fileWriter.flush();
+            fileWriter.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+            Alert dialog = new Alert(Alert.AlertType.ERROR, "Could not write signed file", ButtonType.OK);
+            dialog.show();
+        }
 
     }
 

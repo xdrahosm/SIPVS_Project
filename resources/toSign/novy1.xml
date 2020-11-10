@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:Library xmlns:md="http://www.example.org/sipvs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.example.org/sipvs/schema.xsd">
+    <md:Book>
+        <md:BookName>Guliverove cety</md:BookName>
+        <md:AuthorName>Guliver</md:AuthorName>
+        <md:Pages>123</md:Pages>
+        <md:PrintingYear>111</md:PrintingYear>
+        <md:FirstPublished>111</md:FirstPublished>
+        <md:ISBN>212132</md:ISBN>
+        <md:BookDescription>aksjalsjaklsjdlaksjd</md:BookDescription>
+        <md:BorrowHistory>
+            <md:Borrow id="1">
+                <md:StudentName>Janko Hrasko</md:StudentName>
+                <md:BorrowDate>2020-10-01</md:BorrowDate>
+                <md:ReturnDate>2020-10-27</md:ReturnDate>
+            </md:Borrow>
+            <md:Borrow id="1">
+                <md:StudentName>Janko Hrasko</md:StudentName>
+                <md:BorrowDate>2020-10-02</md:BorrowDate>
+                <md:ReturnDate>2020-10-28</md:ReturnDate>
+            </md:Borrow>
+        </md:BorrowHistory>
+    </md:Book>
+</md:Library>
