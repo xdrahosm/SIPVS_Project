@@ -78,14 +78,13 @@ public class ResourceHelper {
                 .findFirst()
                 .orElse(null);
 
-        List<String> signedFiles = Stream.of(Objects.requireNonNull(new File(toSigndirName).listFiles()))
+        String signedFiles = Stream.of(Objects.requireNonNull(new File(toSigndirName).listFiles()))
                 .filter(file -> !file.isDirectory() && file.getName().contains("xml"))
                 .map((x) -> {
                     var absPath = x.getAbsolutePath().split("resources");
                     var path = absPath[0];
                     return new File(path + signedDirName, x.getName()).getPath();
-                })
-                .collect(Collectors.toList());
+                }).findFirst().orElse(null);
 
         return new XadesSigner(toSignXMLs, xsdFile, xslFile, signedFiles);
     }
