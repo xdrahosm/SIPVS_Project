@@ -5,6 +5,7 @@ import SIPVS.helper.XmlManipulator;
 import SIPVS.model.Book;
 import SIPVS.model.Borrow;
 import SIPVS.sign.XadesSigner;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +44,9 @@ public class Controller implements Initializable {
 
     @FXML
     Button signXML;
+
+    @FXML
+    Button addTS;
 
     @FXML
     DatePicker borrowDate;
@@ -148,21 +152,41 @@ public class Controller implements Initializable {
         });
 
         signXML.setOnAction(event -> {
-            Thread one = new Thread() {
-                public void run() {
+//           Thread one = new Thread() {
+//               public void run() {
+//
+//                   XadesSigner signer = ResourceHelper.getXadesSigner();
+//                   if(signer == null) {
+//                       System.out.println("Signer = null!!");
+//                       return;
+//                   }
+//
+//                   signer.sign();
+//
+//               }
+//           };
+             Platform.runLater(new Runnable() {
+                 @Override
+                 public void run() {
+                     XadesSigner signer = ResourceHelper.getXadesSigner();
+                     if(signer == null) {
+                         System.out.println("Signer = null!!");
+                         return;
+                     }
 
-                    XadesSigner signer = ResourceHelper.getXadesSigner();
-                    if(signer == null) {
-                        System.out.println("Signer = null!!");
-                        return;
-                    }
+                     signer.sign();
 
-                    signer.sign();
-
-                }
-            };
-            one.start();
+                 }
+             });
         });
+        addTS.setOnAction(new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent event) {
+
+				xmlManipulator.saveXmlWithTS();
+
+			}
+		});
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<Borrow,String>("name"));
         borrowColumn.setCellValueFactory(new PropertyValueFactory<Borrow,String>("borrowDate"));

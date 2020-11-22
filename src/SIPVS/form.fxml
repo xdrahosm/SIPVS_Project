@@ -90,6 +90,7 @@
                 <Button fx:id="validateXml" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Validate XML" />
                 <Button fx:id="generateHtml" mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Generate HTML" />
                 <Button fx:id="signXML" mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Sign XML" />
+                <Button fx:id="addTS" mnemonicParsing="false" prefHeight="31.0" prefWidth="152.0" text="Add TimeStamp" />
 
             </items>
         </ToolBar>
